@@ -1,13 +1,10 @@
+import re
 from rag_pipeline.app import app as rag_app
 from sql_pipeline.agent import analytical_agent
 
 
-# -----------------------------
-# Run RAG Pipeline
-# -----------------------------
 def run_rag(question: str):
-
-    rag_state = rag_app.invoke({
+    return rag_app.invoke({
         "question": question,
         "retrieved": [],
         "reranked": [],
@@ -23,78 +20,86 @@ def run_rag(question: str):
         "sources": set(),
         "hallucination_check": {},
         "retry_count": 0
-    })
-
-    return rag_state.get("final", rag_state.get("answer", "No response"))
+    })["final"]
 
 
-# -----------------------------
-# Run SQL Pipeline (RBAC enforced)
-# -----------------------------
-def run_sql(question: str, user: dict):
-
-    if user is None:
-        return "❌ Unauthorized SQL access (user missing)."
-
-    return analytical_agent(question, user)
+def run_sql(question: str):
+    return analytical_agent(question)
 
 
 # -----------------------------
-# Dependency Execution
+# SQL depends on RAG
 # -----------------------------
-def sql_depends_on_rag(question: str, user: dict):
-    """
-    First run RAG to get policy info,
-    then SQL for employee data.
-    """
+def sql_depends_on_rag(question: str):
 
     rag_answer = run_rag(question)
 
-    combined_question = f"""
-Policy Context:
+    # Extract numeric limits like "12 days"
+    match = re.search(r"maximum of (\d+)", rag_answer)
+
+    if match:
+        limit = match.group(1)
+
+        # Inject into SQL question
+        sql_question = f"{question}. Policy limit is {limit}."
+
+        sql_answer = run_sql(sql_question)
+
+        return f"""
+📌 Policy Info (RAG):
 {rag_answer}
 
-Now answer analytically using employee database:
-{question}
+📊 Data Result (SQL):
+{sql_answer}
 """
 
-    sql_answer = run_sql(combined_question, user)
+    return f"""
+📌 Policy Answer:
+{rag_answer}
 
-    return f"{rag_answer}\n\n📊 Analytical Result:\n{sql_answer}"
+❌ Could not extract numeric limit for SQL.
+"""
 
 
-def rag_depends_on_sql(question: str, user: dict):
-    """
-    First run SQL to get numbers,
-    then RAG to explain policy implications.
-    """
+# -----------------------------
+# RAG depends on SQL
+# -----------------------------
+def rag_depends_on_sql(question: str):
 
-    sql_answer = run_sql(question, user)
+    sql_answer = run_sql(question)
 
-    combined_question = f"""
-Employee Data Result:
+    # Feed SQL output into RAG context
+    rag_question = f"""
+User asked: {question}
+
+Dataset insight:
 {sql_answer}
 
-Now answer using policy documents:
-{question}
+Now explain based on HR policies.
 """
 
-    rag_answer = run_rag(combined_question)
+    rag_answer = run_rag(rag_question)
 
-    return f"{sql_answer}\n\n📘 Policy Explanation:\n{rag_answer}"
+    return f"""
+📊 Dataset Insight (SQL):
+{sql_answer}
+
+📌 Policy Explanation (RAG):
+{rag_answer}
+"""
 
 
 # -----------------------------
-# Independent Execution
+# Independent execution
 # -----------------------------
-def independent_run(question: str, intents: set, user: dict):
+def independent_run(question: str, intents: set):
 
     outputs = []
 
     if "rag" in intents:
-        outputs.append("📘 Policy Answer:\n" + run_rag(question))
+        outputs.append(run_rag(question))
 
     if "sql" in intents:
-        outputs.append("📊 Data Answer:\n" + run_sql(question, user))
+        outputs.append(run_sql(question))
 
     return "\n\n".join(outputs)

@@ -1,28 +1,25 @@
-from sql_pipeline.database import TABLES, TABLE_COLUMNS
-from sql_pipeline.llm import qwen
-
+import re
+from sql_pipeline.llm import llm_call
+from sql_pipeline.database import COLUMNS
 
 def nl_to_sql(question):
-
-    schema_text = ""
-
-    for table in TABLES:
-        schema_text += f"\nTable: {table}\nColumns: {TABLE_COLUMNS[table]}\n"
-
     prompt = f"""
 You are a SQL-only generator.
 
-Available Database Schema:
-{schema_text}
+Table: employees
+Columns: {COLUMNS}
 
 Rules:
 - Output ONLY SQL
 - Must start with SELECT
-- Use correct table names exactly as given
+- Output ONLY DuckDB compatible SQL
+- only use these columns and table given
+- Do NOT use backticks (`), use plain column names
 
 Question: {question}
 
 SQL:
 """
-
-    return qwen(prompt)
+    out = llm_call(prompt)
+    m = re.search(r"(select .*?$)", out, re.I | re.S)
+    return m.group(1).strip() if m else None

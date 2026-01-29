@@ -1,0 +1,37 @@
+2026-01-28 10:05:46,451 | INFO | ROUTER | Detecting intent for: how many total employees are there
+2026-01-28 10:05:46,453 | INFO | ROUTER | Intent decided: {'sql'}
+2026-01-28 10:12:11,807 | INFO | ROUTER | Detecting intent for: how many employees are there
+2026-01-28 10:12:11,809 | INFO | ROUTER | Intent decided: {'sql'}
+2026-01-28 16:55:11,381 | INFO | RAG_PIPELINE | Retrieved 20 chunks
+2026-01-28 16:55:11,383 | INFO | RAG_PIPELINE | Answer generated successfully
+2026-01-28 21:28:28,212 | INFO | ROUTER | [LLM Intent] {'sql'}
+2026-01-28 21:28:28,212 | INFO | ROUTER | [Dependency] independent
+2026-01-28 21:33:08,538 | INFO | ROUTER | [LLM Intent] {'sql'}
+2026-01-28 21:33:08,540 | INFO | ROUTER | [Dependency] independent
+2026-01-28 21:33:44,957 | INFO | ROUTER | [LLM Intent] {'sql'}
+2026-01-28 21:33:44,957 | INFO | ROUTER | [Dependency] independent
+2026-01-28 21:34:47,796 | INFO | ROUTER | [LLM Intent] {'sql'}
+2026-01-28 21:34:47,801 | INFO | ROUTER | [Dependency] independent
+2026-01-28 21:35:58,902 | INFO | ROUTER | [LLM Intent] {'sql'}
+2026-01-28 21:35:58,903 | INFO | ROUTER | [Dependency] independent
+2026-01-28 21:37:20,131 | INFO | ROUTER | [LLM Intent] {'sql'}
+2026-01-28 21:37:20,132 | INFO | ROUTER | [Dependency] independent
+2026-01-28 21:45:34,580 | INFO | RAG_PIPELINE | Retrieved 20 chunks
+2026-01-28 21:45:34,581 | INFO | RAG_PIPELINE | Answer generated successfully
+2026-01-28 21:52:38,921 | INFO | RAG_PIPELINE | Retrieved 20 chunks
+2026-01-28 21:52:38,923 | INFO | RAG_PIPELINE | Answer generated successfully
+2026-01-28 23:57:55,851 | INFO | RAG_PIPELINE | Retrieved 20 chunks
+2026-01-28 23:57:55,855 | INFO | RAG_PIPELINE | Answer generated successfully
+2026-01-29 00:08:38,368 | INFO | RAG_PIPELINE | Retrieved 20 chunks
+2026-01-29 00:08:38,368 | INFO | RAG_PIPELINE | Answer generated successfully
+2026-01-29 00:13:16,641 | INFO | RAG_PIPELINE | Retrieved 20 chunks
+2026-01-29 00:13:16,643 | INFO | RAG_PIPELINE | Answer generated successfully
+2026-01-29 00:17:55,681 | INFO | RAG_PIPELINE | Retrieved 20 chunks
+2026-01-29 00:17:55,681 | INFO | RAG_PIPELINE | Answer generated successfully
+2026-01-29 00:27:09,726 | INFO | RAG_PIPELINE | Retrieved 20 chunks
+2026-01-29 00:27:09,728 | INFO | RAG_PIPELINE | Answer generated successfully
+2026-01-29 00:32:15,796 | INFO | RAG_PIPELINE | Retrieved 20 chunks
+2026-01-29 00:32:15,797 | INFO | RAG_PIPELINE | Answer generated successfully
+2026-01-29 00:33:18,198 | WARNING | RAG_PIPELINE | Hallucination detected: ['Low overlap: 13.11%']
+2026-01-29 00:41:01,819 | INFO | RAG_PIPELINE | Retrieved 20 chunks
+2026-01-29 00:41:01,820 | INFO | RAG_PIPELINE | Answer generated successfully

@@ -7,6 +7,9 @@ from rag_pipeline.prompts import answer_prompt
 from rag_pipeline.llm import gemma_llm
 from rag_pipeline.config import MAX_RETRIES
 
+from logger import get_logger
+logger = get_logger("RAG_PIPELINE")
+
 class GraphState(TypedDict):
     question: str
     intent: str
@@ -28,6 +31,9 @@ def intent_node(state):
 
 def retrieve_node(state):
     chunks = retrieve_chunks(state["question"])
+    logger.info(f"Retrieved {len(chunks)} chunks")
+    logger.info("Answer generated successfully")
+
     return {**state, "retrieved": chunks}
 
 
@@ -115,6 +121,7 @@ def validate_node(state):
     retry_count = state.get("retry_count", 0)
 
     if check.get("is_hallucination"):
+        logger.warning(f"Hallucination detected: {check['reasons']}")
         retry_count += 1
 
     return {

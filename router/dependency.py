@@ -31,7 +31,7 @@ def detect_dependency(question: str) -> str:
     # Data summary needed first
     if any(x in q for x in [
         "based on employee data", "according to dataset",
-        "attrition rate", "performance trend", "analytics"
+        "attrition rate", "performance trend", "analytics","for an employee"
     ]):
         return "rag_depends_on_sql"
 

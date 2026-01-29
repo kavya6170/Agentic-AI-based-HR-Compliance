@@ -1,4 +1,4 @@
-from typing import TypedDict, Set, Optional, Dict
+from typing import TypedDict, Set
 from langgraph.graph import StateGraph, END
 
 from router.rules import rule_based_intent
@@ -15,12 +15,11 @@ from router.hybrid_executor import (
 
 
 # -----------------------------
-# Router State (Updated)
+# Router State
 # -----------------------------
 class RouterState(TypedDict):
     question: str
     intents: Set[str]
-    user: Optional[Dict]     # ✅ Needed for RBAC
     final: str
 
 
@@ -36,7 +35,7 @@ def detect_intent_node(state):
     if intents != {"unknown"}:
         print(f"\n🟢 Intent decided by RULES → {intents}")
 
-    # Step 2: Fallback to LLM classifier
+    # Step 2: If unclear, fallback to LLM classifier
     if intents == {"unknown"}:
         intents = llm_intent_classifier(question)
         print(f"\n🔵 Intent decided by LLM → {intents}")
@@ -55,56 +54,48 @@ def route_node(state):
 
     question = state["question"]
     intents = state["intents"]
-    user = state.get("user", None)
 
-    # -----------------------------
-    # Greeting Shortcut
-    # -----------------------------
-    if "greet" in intents:
-        return {**state, "final": "Hello! How can I help you today?"}
+    # ✅ Step 1: Memory Retrieval FIRST
+    memory_context = get_memory_context(question)
 
-    # -----------------------------
-    # ✅ Step 1: Memory Retrieval ONLY for RAG
-    # -----------------------------
-    enriched_question = question
+    if memory_context:
+        print("🧠 Memory Match Found!")
 
-    if "rag" in intents:
-        memory_context = get_memory_context(question)
-
-        if memory_context:
-            print("🧠 Memory Match Found! Injecting context...")
-
-            enriched_question = f"""
-Previous Conversation Memory:
+        # Inject memory into query
+        enriched_question = f"""
+Previous Memory Context:
 {memory_context}
 
 Now answer the new question:
 {question}
 """
+    else:
+        enriched_question = question
 
-    # -----------------------------
     # ✅ Step 2: Dependency Detection
-    # -----------------------------
     dependency = detect_dependency(question)
     print(f"⚡ Dependency detected → {dependency}")
 
     # -----------------------------
-    # ✅ Step 3: Execute Pipelines
+    # Greeting
     # -----------------------------
-    if dependency == "sql_depends_on_rag":
-        final = sql_depends_on_rag(enriched_question, user)
+    if "greet" in intents:
+        final = "Hello! How can I help you today?"
+
+    # -----------------------------
+    # Dependency Execution
+    # -----------------------------
+    elif dependency == "sql_depends_on_rag":
+        final = sql_depends_on_rag(enriched_question)
 
     elif dependency == "rag_depends_on_sql":
-        final = rag_depends_on_sql(enriched_question, user)
+        final = rag_depends_on_sql(enriched_question)
 
     else:
-        final = independent_run(enriched_question, intents, user)
+        final = independent_run(enriched_question, intents)
 
-    # -----------------------------
-    # ✅ Step 4: Store Memory Only if Useful
-    # -----------------------------
-    if final and "❌" not in final and "Hello" not in final:
-        store_memory(question, final)
+    # ✅ Step 3: Store Conversation in Memory
+    store_memory(question, final)
 
     return {**state, "final": final}
 

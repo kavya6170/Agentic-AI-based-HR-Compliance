@@ -1,5 +1,7 @@
 from memory.short_term import ShortTermMemory
 from memory.long_term import save, search
+from logger import get_logger
+logger = get_logger("MEMORY")
 
 
 class MemoryManager:
@@ -16,6 +18,7 @@ class MemoryManager:
         flushed_entry = self.stm.add(question, answer)
 
         if flushed_entry:
+            logger.info("STM limit reached → flushing entry to SQLite LTM")
             print("⚡ STM full → flushing oldest chat into SQLite...")
             save(flushed_entry)
 

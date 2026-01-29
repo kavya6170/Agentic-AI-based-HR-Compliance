@@ -32,7 +32,12 @@ def load_document(file_path):
         return Docx2txtLoader(file_path).load()
 
     if file_path.lower().endswith(".txt"):
-        return TextLoader(file_path, encoding="utf-8").load()
+        try:
+            return TextLoader(file_path, encoding="utf-8").load()
+        except Exception:
+            print("⚠️ UTF-8 failed, retrying with cp1252 encoding...")
+            return TextLoader(file_path, encoding="cp1252").load()
+
 
     raise ValueError(f"Unsupported file type: {file_path}")
 
