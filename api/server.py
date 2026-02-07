@@ -1,13 +1,13 @@
 from fastapi import FastAPI, UploadFile, File
-import os
-from rag_pipeline.ingest import ingest
-from rag_pipeline.config import DATA_DIR
-from api.schemas import QueryRequest
+from api.schemas import QueryRequest, QueryResponse
 
 from router.graph import router_app
+import os
 from memory.long_term import init_db
+from rag_pipeline.config import DATA_DIR
+from rag_pipeline.ingest import ingest
 
-# ✅ Initialize DB at startup
+# Initialize DB at startup
 init_db()
 
 app = FastAPI(
@@ -21,12 +21,17 @@ def home():
     return {"message": "HR Compliance Assistant API Running"}
 
 
+from logger import get_logger
+
+logger = get_logger("API")
+
 @app.post("/ask")
 def ask_question(req: QueryRequest):
     """
     Main API endpoint used by Streamlit UI.
     Always returns valid JSON response.
     """
+    logger.info(f"📥 Received Question: '{req.question}' | User: {req.user}")
 
     try:
         result = router_app.invoke({
@@ -34,12 +39,16 @@ def ask_question(req: QueryRequest):
             "user": req.user
         })
 
+        final_answer = result.get("final", "⚠️ No answer generated.")
+        logger.info("✅ Response generated successfully")
+        
         return {
-            "answer": result.get("final", "⚠️ No answer generated."),
+            "answer": final_answer,
             "intents": list(result.get("intents", []))
         }
 
     except Exception as e:
+        logger.error(f"❌ API Error: {str(e)}", exc_info=True)
         # ✅ Prevent FastAPI from returning HTML crash page
         return {
             "answer": f"❌ Internal Server Error: {str(e)}",

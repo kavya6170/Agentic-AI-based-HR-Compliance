@@ -4,7 +4,7 @@ from rag_pipeline.retrieval import retrieve_chunks
 from rag_pipeline.rerank import rerank_chunks
 from rag_pipeline.hallucination import detect_hallucination
 from rag_pipeline.prompts import answer_prompt
-from rag_pipeline.llm import gemma_llm
+from rag_pipeline.llm import llm
 from rag_pipeline.config import MAX_RETRIES
 
 from logger import get_logger
@@ -26,14 +26,13 @@ class GraphState(TypedDict):
 
 def intent_node(state):
     intent = detect_intent(state["question"])
+    logger.info(f"RAG Intent Detected: '{intent}'")
     return {**state, "intent": intent}
 
 
 def retrieve_node(state):
     chunks = retrieve_chunks(state["question"])
     logger.info(f"Retrieved {len(chunks)} chunks")
-    logger.info("Answer generated successfully")
-
     return {**state, "retrieved": chunks}
 
 
@@ -104,10 +103,12 @@ def context_node(state):
 
 def generate_node(state):
     if not state["context"].strip():
+        logger.warning("❌ No valid context found for generation.")
         answer = "Information not found in the provided documents."
     else:
         prompt = answer_prompt.format(question=state["question"], context=state["context"])
-        answer = gemma_llm(prompt).strip()
+        answer = llm(prompt).strip()
+        logger.info("✅ RAG Answer Generated")
     return {**state, "answer": answer}
 
 
@@ -121,8 +122,10 @@ def validate_node(state):
     retry_count = state.get("retry_count", 0)
 
     if check.get("is_hallucination"):
-        logger.warning(f"Hallucination detected: {check['reasons']}")
+        logger.warning(f"⚠️ Hallucination Detected (Retry {retry_count + 1})")
         retry_count += 1
+    else:
+        logger.info("✅ Validation Passed")
 
     return {
         **state,

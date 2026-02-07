@@ -1,6 +1,6 @@
 import pandas as pd
 
-USERS_FILE = "C:/Users/karan/Downloads/HR compliance/HR compliance/data/users.csv"
+USERS_FILE = r"C:/Users/karan/Downloads/98% HR compliance/HR compliance/users/users.csv"
 
 
 def load_users():

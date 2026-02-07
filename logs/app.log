@@ -1,37 +1,48 @@
-2026-01-28 10:05:46,451 | INFO | ROUTER | Detecting intent for: how many total employees are there
-2026-01-28 10:05:46,453 | INFO | ROUTER | Intent decided: {'sql'}
-2026-01-28 10:12:11,807 | INFO | ROUTER | Detecting intent for: how many employees are there
-2026-01-28 10:12:11,809 | INFO | ROUTER | Intent decided: {'sql'}
-2026-01-28 16:55:11,381 | INFO | RAG_PIPELINE | Retrieved 20 chunks
-2026-01-28 16:55:11,383 | INFO | RAG_PIPELINE | Answer generated successfully
-2026-01-28 21:28:28,212 | INFO | ROUTER | [LLM Intent] {'sql'}
-2026-01-28 21:28:28,212 | INFO | ROUTER | [Dependency] independent
-2026-01-28 21:33:08,538 | INFO | ROUTER | [LLM Intent] {'sql'}
-2026-01-28 21:33:08,540 | INFO | ROUTER | [Dependency] independent
-2026-01-28 21:33:44,957 | INFO | ROUTER | [LLM Intent] {'sql'}
-2026-01-28 21:33:44,957 | INFO | ROUTER | [Dependency] independent
-2026-01-28 21:34:47,796 | INFO | ROUTER | [LLM Intent] {'sql'}
-2026-01-28 21:34:47,801 | INFO | ROUTER | [Dependency] independent
-2026-01-28 21:35:58,902 | INFO | ROUTER | [LLM Intent] {'sql'}
-2026-01-28 21:35:58,903 | INFO | ROUTER | [Dependency] independent
-2026-01-28 21:37:20,131 | INFO | ROUTER | [LLM Intent] {'sql'}
-2026-01-28 21:37:20,132 | INFO | ROUTER | [Dependency] independent
-2026-01-28 21:45:34,580 | INFO | RAG_PIPELINE | Retrieved 20 chunks
-2026-01-28 21:45:34,581 | INFO | RAG_PIPELINE | Answer generated successfully
-2026-01-28 21:52:38,921 | INFO | RAG_PIPELINE | Retrieved 20 chunks
-2026-01-28 21:52:38,923 | INFO | RAG_PIPELINE | Answer generated successfully
-2026-01-28 23:57:55,851 | INFO | RAG_PIPELINE | Retrieved 20 chunks
-2026-01-28 23:57:55,855 | INFO | RAG_PIPELINE | Answer generated successfully
-2026-01-29 00:08:38,368 | INFO | RAG_PIPELINE | Retrieved 20 chunks
-2026-01-29 00:08:38,368 | INFO | RAG_PIPELINE | Answer generated successfully
-2026-01-29 00:13:16,641 | INFO | RAG_PIPELINE | Retrieved 20 chunks
-2026-01-29 00:13:16,643 | INFO | RAG_PIPELINE | Answer generated successfully
-2026-01-29 00:17:55,681 | INFO | RAG_PIPELINE | Retrieved 20 chunks
-2026-01-29 00:17:55,681 | INFO | RAG_PIPELINE | Answer generated successfully
-2026-01-29 00:27:09,726 | INFO | RAG_PIPELINE | Retrieved 20 chunks
-2026-01-29 00:27:09,728 | INFO | RAG_PIPELINE | Answer generated successfully
-2026-01-29 00:32:15,796 | INFO | RAG_PIPELINE | Retrieved 20 chunks
-2026-01-29 00:32:15,797 | INFO | RAG_PIPELINE | Answer generated successfully
-2026-01-29 00:33:18,198 | WARNING | RAG_PIPELINE | Hallucination detected: ['Low overlap: 13.11%']
-2026-01-29 00:41:01,819 | INFO | RAG_PIPELINE | Retrieved 20 chunks
-2026-01-29 00:41:01,820 | INFO | RAG_PIPELINE | Answer generated successfully
+2026-01-30 12:43:32,379 | INFO | ROUTER | Detecting intent for: hi gf i want to leave comapny
+2026-01-30 12:43:32,380 | INFO | ROUTER | Intent decided: {'rag'}
+2026-01-30 12:43:32,401 | INFO | RAG_PIPELINE | RAG Intent Detected: 'general'
+2026-01-30 12:43:32,808 | INFO | RAG_PIPELINE | Retrieved 20 chunks
+2026-01-30 12:46:01,646 | INFO | ROUTER | Detecting intent for: hi hr i want to leave company
+2026-01-30 12:46:01,646 | INFO | ROUTER | Intent decided: {'rag'}
+2026-01-30 12:46:01,655 | INFO | RAG_PIPELINE | RAG Intent Detected: 'general'
+2026-01-30 12:46:01,773 | INFO | RAG_PIPELINE | Retrieved 20 chunks
+2026-01-30 12:50:41,247 | INFO | ROUTER | Detecting intent for: hi hr i want to leave company
+2026-01-30 12:50:41,247 | INFO | ROUTER | Intent decided: {'rag'}
+2026-01-30 12:50:41,264 | INFO | RAG_PIPELINE | RAG Intent Detected: 'general'
+2026-01-30 12:50:41,379 | INFO | RAG_PIPELINE | Retrieved 20 chunks
+2026-01-30 12:54:04,824 | INFO | ROUTER | Detecting intent for: how many employees are there
+2026-01-30 12:54:04,826 | INFO | ROUTER | Intent decided: {'sql'}
+2026-01-30 12:56:17,181 | INFO | ROUTER | Detecting intent for: i want to file case on comapny how can i do that 
+2026-01-30 12:56:17,181 | INFO | ROUTER | Intent decided: {'rag'}
+2026-01-30 12:56:47,084 | INFO | ROUTER | Detecting intent for: how to do fraud with company 
+2026-01-30 12:56:47,085 | INFO | ROUTER | Intent decided: {'rag', 'sql'}
+2026-01-30 12:56:47,092 | INFO | RAG_PIPELINE | RAG Intent Detected: 'procedure'
+2026-01-30 12:56:47,173 | INFO | RAG_PIPELINE | Retrieved 20 chunks
+2026-01-30 12:59:02,390 | INFO | ROUTER | Detecting intent for: i want to change my boss what i can do
+2026-01-30 12:59:02,390 | INFO | ROUTER | Intent decided: {'rag'}
+2026-01-30 12:59:02,404 | INFO | RAG_PIPELINE | RAG Intent Detected: 'general'
+2026-01-30 12:59:02,494 | INFO | RAG_PIPELINE | Retrieved 20 chunks
+2026-01-30 13:04:11,783 | INFO | ROUTER | Detecting intent for: help me to leave comapny
+2026-01-30 13:04:11,784 | INFO | ROUTER | Intent decided: {'rag'}
+2026-01-30 13:04:11,800 | INFO | RAG_PIPELINE | RAG Intent Detected: 'general'
+2026-01-30 13:04:11,871 | INFO | RAG_PIPELINE | Retrieved 20 chunks
+2026-01-30 13:07:34,533 | INFO | ROUTER | Detecting intent for: if they donat give my salary then what i can do
+2026-01-30 13:07:34,534 | INFO | ROUTER | Intent decided: {'rag'}
+2026-01-30 13:07:34,545 | INFO | RAG_PIPELINE | RAG Intent Detected: 'general'
+2026-01-30 13:07:34,659 | INFO | RAG_PIPELINE | Retrieved 20 chunks
+2026-01-30 13:10:49,724 | INFO | ROUTER | Detecting intent for: if they donat give my salary then what i can do
+2026-01-30 13:10:49,724 | INFO | ROUTER | Intent decided: {'rag'}
+2026-01-30 13:10:49,724 | INFO | RAG_PIPELINE | RAG Intent Detected: 'general'
+2026-01-30 13:10:49,745 | INFO | RAG_PIPELINE | Retrieved 20 chunks
+2026-01-30 13:14:29,464 | INFO | ROUTER | Detecting intent for: but my question was that what if company is not giving me my salary on time
+2026-01-30 13:14:29,465 | INFO | ROUTER | Intent decided: {'rag'}
+2026-01-30 13:15:28,550 | INFO | ROUTER | Detecting intent for: what if company is not giving me my salary where I complaint about it
+2026-01-30 13:15:28,550 | INFO | ROUTER | Intent decided: {'rag'}
+2026-01-30 13:19:01,264 | INFO | ROUTER | Detecting intent for: what if my salary is not paid
+2026-01-30 13:19:01,264 | INFO | ROUTER | Intent decided: {'rag'}
+2026-01-30 13:19:01,275 | INFO | RAG_PIPELINE | RAG Intent Detected: 'general'
+2026-01-30 13:19:01,376 | INFO | RAG_PIPELINE | Retrieved 20 chunks
+2026-01-30 14:02:10,701 | INFO | ROUTER | Detecting intent for: what steps I can take if my salary is not paid by company
+2026-01-30 14:02:10,701 | INFO | ROUTER | Intent decided: {'rag'}
+2026-01-30 14:02:10,713 | INFO | RAG_PIPELINE | RAG Intent Detected: 'procedure'
+2026-01-30 14:02:10,839 | INFO | RAG_PIPELINE | Retrieved 20 chunks

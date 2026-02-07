@@ -3,11 +3,7 @@ from rag_pipeline.graph_nodes import *
 from rag_pipeline.ingest import ingest
 
 print("🔍 Checking for new PDFs...")
-try:
-    ingest()
-except Exception as e:
-    print("❌ Ingestion failed but server will still run:", e)
-
+ingest()
 
 graph = StateGraph(GraphState)
 
