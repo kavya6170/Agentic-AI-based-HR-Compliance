@@ -2,7 +2,7 @@ import os
 
 DATA_DIR = "./data"
 VECTOR_DIR = "./vector_store"
-RF_MODEL_PATH = "./models/hallucination_RF_model.pkl"
+RF_MODEL_PATH = "./model/hallucination_RF_model.pkl"
 
 CHUNK_SIZE = 800
 CHUNK_OVERLAP = 200

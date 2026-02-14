@@ -46,3 +46,39 @@
 2026-01-30 14:02:10,701 | INFO | ROUTER | Intent decided: {'rag'}
 2026-01-30 14:02:10,713 | INFO | RAG_PIPELINE | RAG Intent Detected: 'procedure'
 2026-01-30 14:02:10,839 | INFO | RAG_PIPELINE | Retrieved 20 chunks
+2026-02-07 10:15:14,956 | INFO | ROUTER | Detecting intent for: Hello
+2026-02-07 10:15:14,966 | INFO | ROUTER | Intent decided: {'greet'}
+2026-02-07 10:15:23,258 | INFO | ROUTER | Detecting intent for: What is posh policy?
+2026-02-07 10:15:23,258 | INFO | ROUTER | Intent decided: {'rag'}
+2026-02-07 10:15:23,319 | INFO | RAG_PIPELINE | RAG Intent Detected: 'general'
+2026-02-07 10:15:23,607 | INFO | RAG_PIPELINE | Retrieved 20 chunks
+2026-02-07 10:20:29,993 | INFO | ROUTER | Detecting intent for: how many employees are there?
+2026-02-07 10:20:30,494 | INFO | ROUTER | Intent decided: {'sql'}
+2026-02-09 02:05:47,027 | INFO | ROUTER | Detecting intent for: what is Posh policy?
+2026-02-09 02:05:47,054 | INFO | ROUTER | Intent decided: {'rag'}
+2026-02-09 02:05:47,127 | INFO | RAG_PIPELINE | RAG Intent Detected: 'general'
+2026-02-09 02:05:47,408 | INFO | RAG_PIPELINE | Retrieved 20 chunks
+2026-02-09 02:27:49,672 | INFO | ROUTER | Detecting intent for: what is posh policy?
+2026-02-09 02:27:49,783 | INFO | ROUTER | Intent decided: {'rag'}
+2026-02-09 02:27:52,148 | INFO | RAG_PIPELINE | RAG Intent Detected: 'general'
+2026-02-09 02:27:59,636 | INFO | RAG_PIPELINE | Retrieved 20 chunks
+2026-02-09 02:36:29,484 | INFO | ROUTER | Detecting intent for: What is posh policy
+2026-02-09 02:36:29,503 | INFO | ROUTER | Intent decided: {'rag'}
+2026-02-09 02:36:30,223 | INFO | RAG_PIPELINE | RAG Intent Detected: 'general'
+2026-02-09 02:36:33,056 | INFO | RAG_PIPELINE | Retrieved 20 chunks
+2026-02-09 02:37:52,096 | INFO | ROUTER | Detecting intent for: how many employees are there
+2026-02-09 02:37:52,109 | INFO | ROUTER | Intent decided: {'sql'}
+2026-02-09 02:43:59,768 | INFO | ROUTER | Detecting intent for: how many sick leaves are allowed and how many employees are already taken those leave
+2026-02-09 02:43:59,773 | INFO | ROUTER | Intent decided: {'sql'}
+2026-02-09 09:11:26,776 | INFO | ROUTER | Detecting intent for: What is the HR policy for leaves?
+2026-02-09 09:11:26,830 | INFO | ROUTER | Intent decided: {'rag'}
+2026-02-09 09:11:27,635 | INFO | RAG_PIPELINE | RAG Intent Detected: 'definition'
+2026-02-09 09:11:33,625 | INFO | RAG_PIPELINE | Retrieved 20 chunks
+2026-02-09 09:16:19,970 | INFO | ROUTER | Detecting intent for: What is the HR policy for leaves?
+2026-02-09 09:16:20,011 | INFO | ROUTER | Intent decided: {'rag'}
+2026-02-09 09:16:20,400 | INFO | RAG_PIPELINE | RAG Intent Detected: 'procedure'
+2026-02-09 09:16:29,335 | INFO | RAG_PIPELINE | Retrieved 20 chunks
+2026-02-09 09:25:33,558 | INFO | ROUTER | Detecting intent for: what is posh policy?
+2026-02-09 09:25:33,559 | INFO | ROUTER | Intent decided: {'rag'}
+2026-02-09 09:25:34,001 | INFO | RAG_PIPELINE | RAG Intent Detected: 'general'
+2026-02-09 09:25:36,553 | INFO | RAG_PIPELINE | Retrieved 20 chunks
